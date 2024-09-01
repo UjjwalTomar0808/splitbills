@@ -9,13 +9,13 @@ const initialFriends = [
   },
   {
     id: 933372,
-    name: "AAAAA",
+    name: "RISHABH",
     image: "https://i.pravatar.cc/48?u=933372",
     balance: 20,
   },
   {
     id: 499476,
-    name: "RISHABH",
+    name: "AAA",
     image: "https://i.pravatar.cc/48",
     balance: 0,
   },
@@ -67,6 +67,12 @@ export default function App() {
     setSelectedFriends([]);
   }
 
+  function handleClearBalance() {
+    setFriends((friends) =>
+      friends.map((friend) => ({ ...friend, balance: 0 }))
+    );
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -81,6 +87,8 @@ export default function App() {
         <Button onClick={handleShowAddFriend}>
           {showAddFriend ? "Close" : "Add friend"}
         </Button>
+        
+        <Button onClick={handleClearBalance}>Clear Balance</Button>
       </div>
 
       {selectedFriends.length > 0 && (
@@ -92,6 +100,7 @@ export default function App() {
       )}
     </div>
   );
+
 }
 
 function FriendsList({ friends, onSelection, selectedFriends }) {
@@ -119,12 +128,12 @@ function Friend({ friend, onSelection, selectedFriends }) {
 
       {friend.balance < 0 && (
         <p className="red">
-          You owe {friend.name} {Math.abs(friend.balance)}€
+          You owe {friend.name} {Math.abs(friend.balance)}Rs
         </p>
       )}
       {friend.balance > 0 && (
         <p className="green">
-          {friend.name} owes you {Math.abs(friend.balance)}€
+          {friend.name} owes you {Math.abs(friend.balance)}Rs
         </p>
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
